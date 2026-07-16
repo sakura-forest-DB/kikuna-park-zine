@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>菊名桜山公園 協力金の行方</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Oswald:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #F9C5D0;
+    --green: #88C984;
+    --light-green: #EAF3E8;
+    --wine: #7A2B4A;
+    --rose: #C85A7A;
+    --dark: #2d2d2d;
+    --cream: #faf8f5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "Hiragino Maru Gothic ProN", "Hiragino Sans", "Yu Gothic", sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ── Header stripe ── */
+  .header-stripe {
+    width: 100%;
+    height: 8px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--pink) 0px, var(--pink) 16px,
+      var(--green) 16px, var(--green) 32px,
+      var(--wine) 32px, var(--wine) 48px
+    );
+  }
+
+  /* ── Main container ── */
+  .container {
+    max-width: 560px;
+    width: 100%;
+    padding: 48px 24px 64px;
+  }
+
+  /* ── Title block ── */
+  .title-block {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .eyebrow {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .subtitle {
+    font-family: 'Caveat', cursive;
+    font-size: 18px;
+    color: var(--wine);
+    margin-top: 4px;
+  }
+
+  .green-rule {
+    width: 48px;
+    height: 3px;
+    background: var(--green);
+    margin: 20px auto 0;
+    border-radius: 2px;
+  }
+
+  /* ── Issue cards ── */
+  .issue-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .issue-card {
+    display: block;
+    background: #fff;
+    border: 1.5px solid var(--dark);
+    border-radius: 4mm;
+    padding: 24px 28px;
+    text-decoration: none;
+    color: var(--dark);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .issue-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  .issue-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+  }
+
+  .issue-card.issue-01::before { background: var(--pink); }
+  .issue-card.issue-02::before { background: var(--green); }
+  .issue-card.issue-03::before { background: var(--wine); }
+
+  .issue-badge {
+    font-family: "Hiragino Maru Gothic ProN", "Hiragino Sans", "Yu Gothic", sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #fff;
+    display: inline-block;
+    padding: 4px 13px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+  }
+
+  .issue-01 .issue-badge { background: var(--rose); }
+  .issue-02 .issue-badge { background: var(--green); color: var(--dark); }
+  .issue-03 .issue-badge { background: var(--wine); }
+
+  /* ── New! flag (最新号の目印) ── */
+  .new-flag {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--wine);
+    background: var(--pink);
+    padding: 3px 9px;
+    border-radius: 999px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  .issue-title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 6px;
+  }
+
+  .issue-desc {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .issue-arrow {
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    color: #ccc;
+    transition: color 0.15s ease, transform 0.15s ease;
+  }
+
+  .issue-card:hover .issue-arrow {
+    color: var(--dark);
+    transform: translateY(-50%) translateX(3px);
+  }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid #e0ddd8;
+  }
+
+  .footer p {
+    font-size: 12px;
+    color: #999;
+    line-height: 1.8;
+  }
+
+  .footer .org {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 4px;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 480px) {
+    .container { padding: 36px 16px 48px; }
+    h1 { font-size: 20px; }
+    .issue-card { padding: 20px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header-stripe"></div>
+
+<div class="container">
+
+  <div class="title-block">
+    <div class="eyebrow">Kikuna Sakurayama Park</div>
+    <h1>菊名桜山公園<br>協力金の行方</h1>
+    <div class="green-rule"></div>
+  </div>
+
+  <div class="issue-list">
+
+    <a href="ZINE_03/kikuna-park-03-web.html" class="issue-card issue-03">
+      <div class="issue-badge">ISSUE 03 · 2026</div><span class="new-flag">New!</span>
+      <div class="issue-title">6月の連絡と、7月の判断。</div>
+      <div class="issue-desc">5〜7月の経過報告 — 辞退の連絡を受けて、理事会が決めたこと。</div>
+      <div class="issue-arrow">→</div>
+    </a>
+
+    <a href="ZINE_01/kikuna-park-01-web.html" class="issue-card issue-01">
+      <div class="issue-badge">ISSUE 01 · 2026</div>
+      <div class="issue-title">協力金、続けますか?</div>
+      <div class="issue-desc">10世帯の声と、これからの判断材料。</div>
+      <div class="issue-arrow">→</div>
+    </a>
+
+    <a href="ZINE_02/kikuna-park-02-web.html" class="issue-card issue-02">
+      <div class="issue-badge">ISSUE 02 · 2026</div>
+      <div class="issue-title">見えない進捗、その内側で。</div>
+      <div class="issue-desc">3〜4月の経過報告 — 動いていないように見えて、動いている。</div>
+      <div class="issue-arrow">→</div>
+    </a>
+
+  </div>
+
+  <div class="footer">
+    <p class="org">マートルコート菊名 管理組合</p>
+    <p>本資料は議案ではなく、情報提供および意見募集として発行しています。</p>
+  </div>
+
+</div>
+
+</body>
+</html>

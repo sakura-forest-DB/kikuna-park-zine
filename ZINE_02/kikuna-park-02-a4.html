@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>菊名桜山公園 / 協力金の行方 | ISSUE 02</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Oswald:wght@700;800&family=Caveat&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green:   #88C984;
+      --pink:    #F9C5D0;
+      --rose:    #C85A7A;
+      --wine:    #7A2B4A;
+      --lgreen:  #EAF3E8;
+      --ink:     #000000;
+      --canvas:  #FDFDFD;
+      --dark:    #0A0A0A;
+      --muted:   #5C5C5C;
+      --mutedlt: #B5B5B5;
+      --border:  #000000;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #BBBBBB;
+      padding: 8mm 0;
+      font-family: 'Hiragino Maru Gothic ProN', 'Hiragino Maru Gothic Pro', 'Noto Sans JP', sans-serif;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    /* ===== PAGE ===== */
+    .page {
+      width: 210mm;
+      height: 293mm;
+      margin: 0 auto 10mm;
+      background: var(--canvas);
+      position: relative;
+      overflow: hidden;
+    }
+    .pi {
+      position: absolute;
+      inset: 0;
+      padding: 11mm 15mm 18mm;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== FOLIO ===== */
+    .folio {
+      position: absolute;
+      bottom: 6mm;
+      left: 16mm;
+      right: 16mm;
+      border-top: 0.5px solid var(--border);
+      padding-top: 2mm;
+      display: flex;
+      justify-content: space-between;
+    }
+    .folio span {
+      font-family: 'Oswald', sans-serif;
+      font-size: 7pt;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ===== TYPE ===== */
+    .cover-h {
+      font-family: 'Hiragino Maru Gothic ProN', 'Hiragino Maru Gothic Pro', 'Noto Sans JP', sans-serif;
+      font-size: 38pt; font-weight: 900;
+      line-height: 1.1; letter-spacing: 0.04em;
+    }
+    .cover-s {
+      font-family: 'Hiragino Maru Gothic ProN', 'Hiragino Maru Gothic Pro', 'Noto Sans JP', sans-serif;
+      font-size: 14pt; font-weight: 500;
+      line-height: 1.65; letter-spacing: 0.02em;
+    }
+    .t-disp {
+      font-family: 'Hiragino Maru Gothic ProN', 'Hiragino Maru Gothic Pro', 'Noto Sans JP', sans-serif;
+      font-size: 18pt; font-weight: 900;
+      line-height: 1.2; letter-spacing: 0.04em;
+    }
+    .t-lead { font-size: 12pt; font-weight: 500; line-height: 1.7; letter-spacing: 0.02em; }
+    .t-body { font-size: 10.5pt; font-weight: 400; line-height: 1.75; letter-spacing: 0.04em; }
+    .t-str  { font-size: 10.5pt; font-weight: 700; line-height: 1.65; letter-spacing: 0.04em; }
+    .t-cap  {
+      font-family: 'Oswald', sans-serif;
+      font-size: 8pt; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .t-fine { font-size: 8pt; font-weight: 400; line-height: 1.4; letter-spacing: 0.06em; }
+    .t-num  { font-variant-numeric: tabular-nums; }
+    strong  { font-weight: 700; }
+    .cm  { color: var(--muted); }
+    .cml { color: var(--mutedlt); }
+    .cw  { color: var(--wine); }
+
+    /* ===== SPACING ===== */
+    .s1 { margin-bottom: 2mm; }
+    .s2 { margin-bottom: 3mm; }
+    .s3 { margin-bottom: 5mm; }
+    .s4 { margin-bottom: 7mm; }
+    .s5 { margin-bottom: 10mm; }
+
+    /* ===== FLEX / GRID ===== */
+    .row   { display: flex; }
+    .col   { display: flex; flex-direction: column; }
+    .f1    { flex: 1; }
+    .ac    { align-items: center; }
+    .afs   { align-items: flex-start; }
+    .jb    { justify-content: space-between; }
+    .g1    { gap: 1.5mm; }
+    .g2    { gap: 2mm; }
+    .g3    { gap: 3mm; }
+    .g4    { gap: 4mm; }
+    .g5    { gap: 5mm; }
+    .gr2   { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+    .gr3   { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm; }
+    .gr5   { display: grid; grid-template-columns: repeat(5,1fr); gap: 2mm; }
+
+    /* ===== CARD ===== */
+    .card  { background: var(--canvas); border: 1.5px solid var(--border); border-radius: 4mm; padding: 3.5mm 4.5mm; }
+    .cardG { background: var(--lgreen); border: 1.5px solid var(--border); border-radius: 4mm; padding: 3.5mm 4.5mm; }
+    .cardP { background: var(--pink);   border: 1.5px solid var(--border); border-radius: 4mm; padding: 3.5mm 4.5mm; }
+    .cardD { background: var(--dark);   border: 1.5px solid var(--border); border-radius: 4mm; padding: 3.5mm 4.5mm; }
+
+    /* ===== TAG ===== */
+    .tag {
+      display: inline-flex; align-items: center;
+      background: var(--pink); color: var(--ink);
+      padding: 0.5mm 2.5mm;
+      border: 1px solid var(--border); border-radius: 9999px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 6pt; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
+    }
+    .tg  { background: var(--green); }
+    .tr  { background: var(--rose); }
+    .tlg { background: var(--lgreen); }
+    .td  { background: var(--dark); color: var(--canvas); }
+
+    /* ===== STANCE BAR ===== */
+    .sbar {
+      display: flex;
+      border: 1.5px solid var(--border); border-radius: 9999px;
+      overflow: hidden; height: 8mm;
+    }
+    .sseg {
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-size: 6pt; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      white-space: nowrap; padding: 0 2mm;
+    }
+
+    /* ===== QUOTE ===== */
+    .qblock { border-left: 3px solid var(--wine); padding-left: 4mm; }
+    .qtext  {
+      font-family: 'Caveat', serif;
+      font-size: 13pt; font-style: italic;
+      color: var(--wine); line-height: 1.5;
+    }
+    .qsrc { font-family: 'Oswald', sans-serif; font-size: 7.5pt; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+    /* ===== TIMELINE ===== */
+    .tl    { padding-left: 6mm; position: relative; }
+    .tl::before { content:''; position:absolute; left:2mm; top:2mm; bottom:2mm; width:1px; background:var(--border); }
+    .tli   { position: relative; margin-bottom: 3mm; }
+    .tli:last-child { margin-bottom: 0; }
+    .tli::before {
+      content:''; position:absolute; left:-5mm; top:1.5mm;
+      width:3mm; height:3mm;
+      border:1px solid var(--border); border-radius:9999px;
+      background: var(--canvas);
+    }
+    .tli.now::before    { background: var(--green); }
+    .tli.future::before { background: var(--pink); border-style: dashed; }
+    .tldate { font-family:'Oswald',sans-serif; font-size:7.5pt; font-weight:600; letter-spacing:0.10em; text-transform:uppercase; color:var(--muted); }
+    .tltit  { font-size:10.5pt; font-weight:700; letter-spacing:0.04em; line-height:1.4; }
+    .tlbody { font-size:10pt; line-height:1.65; letter-spacing:0.03em; }
+
+    /* ===== ISSUE POINT ===== */
+    .ipt { border:1.5px solid var(--border); border-radius:3.5mm; overflow:hidden; }
+    .ihd { background:var(--green); padding:1.5mm 4mm; display:flex; align-items:center; gap:3mm; border-bottom:1.5px solid var(--border); }
+    .inum { font-family:'Oswald',sans-serif; font-size:11pt; font-weight:800; line-height:1; font-variant-numeric:tabular-nums; }
+    .ittl { font-size:11pt; font-weight:700; letter-spacing:0.04em; }
+    .ibdy { background:var(--canvas); padding:2mm 4mm; }
+    .itags { display:flex; flex-wrap:wrap; gap:1.5mm; margin-top:2mm; }
+
+    /* ===== STRIPE ===== */
+    .stripe {
+      background: var(--green);
+      border-top:1.5px solid var(--border); border-bottom:1.5px solid var(--border);
+      padding: 2mm 4mm; overflow: hidden;
+    }
+    .stripe span {
+      font-family:'Oswald',sans-serif; font-size:9pt; font-weight:700;
+      text-transform:uppercase; letter-spacing:0.02em; white-space:nowrap;
+    }
+
+    /* ===== STAKEHOLDER ===== */
+    .stkh { border:1.5px solid var(--border); border-radius:4mm; overflow:hidden; }
+    .stkh-h { padding:2mm 4mm; border-bottom:1.5px solid var(--border); }
+    .stkh-b { padding:3mm 4mm; }
+
+    /* ===== EYEBROW + SECTION TITLE ===== */
+    .eyebrow { font-family:'Oswald',sans-serif; font-size:7pt; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); }
+    .sec-rule { flex:1; height:2px; background:var(--green); margin-left:3mm; }
+
+    /* ===== DIVIDER ===== */
+    .hr { border:none; border-top:1px solid var(--border); }
+
+    /* ===== PRINT ===== */
+    @media print {
+      @page { size: A4 portrait; margin: 0; }
+      body { background: white; padding: 0; }
+      .page {
+        margin: 0;
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+<!-- ══════════════════════════════════
+     P1 — COVER
+     ══════════════════════════════════ -->
+<div class="page" style="background:var(--pink);">
+
+  <!-- decorative flower (right) -->
+  <div style="position:absolute;right:-12mm;top:8mm;opacity:0.45;pointer-events:none;">
+    <svg width="380" height="460" viewBox="0 0 380 460" fill="none">
+      <g transform="translate(220,220)">
+        <ellipse cx="0" cy="-120" rx="42" ry="86" fill="#88C984" stroke="#000" stroke-width="1.5" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-120" rx="42" ry="86" fill="#88C984" stroke="#000" stroke-width="1.5" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-120" rx="42" ry="86" fill="#88C984" stroke="#000" stroke-width="1.5" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-120" rx="42" ry="86" fill="#88C984" stroke="#000" stroke-width="1.5" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-120" rx="42" ry="86" fill="#88C984" stroke="#000" stroke-width="1.5" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="65" fill="#FDFDFD" stroke="#000" stroke-width="1.5"/>
+        <circle cx="-18" cy="-8" r="8" fill="#000"/>
+        <circle cx="18"  cy="-8" r="8" fill="#000"/>
+        <path d="M -23 14 Q 0 32 23 14" stroke="#000" stroke-width="4" fill="none" stroke-linecap="round"/>
+      </g>
+      <g transform="translate(80,390)">
+        <ellipse cx="0" cy="-46" rx="15" ry="32" fill="#FDFDFD" stroke="#000" stroke-width="1" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-46" rx="15" ry="32" fill="#FDFDFD" stroke="#000" stroke-width="1" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-46" rx="15" ry="32" fill="#FDFDFD" stroke="#000" stroke-width="1" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-46" rx="15" ry="32" fill="#FDFDFD" stroke="#000" stroke-width="1" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-46" rx="15" ry="32" fill="#FDFDFD" stroke="#000" stroke-width="1" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="26" fill="#88C984" stroke="#000" stroke-width="1"/>
+        <circle cx="-7" cy="-4" r="3" fill="#000"/>
+        <circle cx="7"  cy="-4" r="3" fill="#000"/>
+        <path d="M -8 5 Q 0 12 8 5" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- content -->
+  <div class="pi" style="justify-content:space-between;padding-bottom:18mm;">
+
+    <!-- top badge -->
+    <div>
+      <span class="tag tg" style="font-size:7.5pt;padding:1mm 3.5mm;">ISSUE 02 · 2026</span>
+    </div>
+
+    <!-- title block -->
+    <div>
+      <div style="width:18mm;height:3px;background:var(--ink);margin-bottom:5mm;"></div>
+      <h1 class="cover-h">菊名桜山公園<br>協力金の行方</h1>
+      <div style="height:5mm;"></div>
+      <p class="cover-s">見えない進捗、その内側で。</p>
+      <p class="cover-s" style="font-size:11pt;color:var(--muted);margin-top:2mm;">3月-4月の経過報告 / 第1号からの続きとして</p>
+      <div style="height:8mm;"></div>
+      <p class="t-fine cm" style="font-size:8pt;letter-spacing:0.08em;line-height:1;">01 Recap · 02 Progress · 03 Findings · 04 Stance · 05 Next</p>
+      <div class="row g4 ac" style="flex-wrap:wrap;margin-top:4mm;">
+        <span class="t-cap cm">マートルコート菊名 管理組合</span>
+        <span class="t-cap cm">·</span>
+        <span class="t-cap cm">2026年5月</span>
+        <span class="t-cap cm">·</span>
+        <span class="t-cap cm">住民向け情報提供</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- bottom stripe -->
+  <div class="stripe" style="position:absolute;bottom:0;left:0;right:0;">
+    <span>動いていた一ヶ月 ✿ 約束した会の行方 ✳︎ 横浜市からの返信 ☻ 合意形成のプロセス ✿ 菊名桜山公園 ✳︎ マートルコート菊名 ☻</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     P2 — RECAP
+     ══════════════════════════════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="s3">
+      <p class="eyebrow s1">01 — Recap</p>
+      <div class="row ac">
+        <h2 class="t-disp">約束した会は、いまどうなっているのか</h2>
+        <div class="sec-rule"></div>
+      </div>
+    </div>
+
+    <!-- lead + stats -->
+    <div class="gr2 s4" style="align-items:start;gap:5mm;">
+      <div>
+        <p class="t-lead s2">第35期から第36期へ ー 本案件は二期にわたって理事会で審議が続いています。第1号で予告した「大沢会長・饗庭副会長を交えた説明の場」は、現時点では実現していません。なぜか。代わりに何が動いていたのか。本号は、その経過の報告です。</p>
+        <p class="t-body s2">第1号でお伝えしたアンケート結果を踏まえ、理事会は5月の方針決定に向けて情報を揃えるべく動いてまいりました。会を設けたい主な目的は、<strong>協力金の使途や愛護会の今後のビジョンについて、青木副会長以外のお立場からのご説明をいただくことでした。</strong></p>
+        <p class="t-body s2">しかし3月以降、横浜市（北部公園緑地事務所）との対話を重ねる中で、<strong>いま会の場を設けることは時期尚早</strong>との判断に至りました。</p>
+        <p class="t-body s2">判断の根拠は二つあります。ひとつは、横浜市自身が公園のビジョン整理を進行中であり、その資料が整わない段階での会合では、有意義な議論にならないと見込まれたこと。</p>
+        <p class="t-body">もうひとつは、愛護会内部に「横浜市のビジョンが明確になるまでは動きようがない」という認識があるため、現時点で会を持ってもこの認識が繰り返されるだけで、<strong>協力金の使途やビジョンについての具体的なご説明には至らない</strong>と見込まれたためです。外形的には停滞に見えた一ヶ月の内側で、実際には何が動いていたのか ー 本号でお伝えします。</p>
+      </div>
+
+      <div class="col g3">
+        <div class="cardP">
+          <p class="t-cap cm s1">継続審議</p>
+          <div class="row ac">
+            <span style="font-family:'Oswald';font-size:28pt;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;">2</span>
+            <span style="font-size:11pt;font-weight:700;margin-left:1mm;">期</span>
+          </div>
+          <p class="t-fine cm" style="margin-top:1mm;">第35期・第36期にまたがる継続審議</p>
+        </div>
+        <div class="gr2" style="gap:2.5mm;">
+          <div class="card">
+            <p class="t-cap cm s1">本号の対象</p>
+            <span style="font-family:'Oswald';font-size:20pt;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;">3-4</span><span style="font-size:9pt;font-weight:700;">月</span>
+            <p class="t-fine cm" style="margin-top:1mm;">水面下の動き</p>
+          </div>
+          <div class="card">
+            <p class="t-cap cm s1">横浜市との協議</p>
+            <span style="font-family:'Oswald';font-size:20pt;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;">4</span><span style="font-size:9pt;font-weight:700;">回</span>
+            <p class="t-fine cm" style="margin-top:1mm;">3月から4月初旬にかけて</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="hr s3">
+
+    <div class="cardG">
+      <p class="t-cap cm s2">本号の位置づけ</p>
+      <div class="gr3 g2">
+        <p class="t-body">・ 第1号（ISSUE 01）と本号（ISSUE 02）は同時にお届けしています</p>
+        <p class="t-body">・ 本号は3月-4月の経過報告であり、結論を出す文書ではありません</p>
+        <p class="t-body">・ <strong>本件は議案ではなく、情報提供および意見募集として位置づけております</strong>（第1号と同じ姿勢の継続）</p>
+      </div>
+      <p class="t-fine cm" style="margin-top:3mm;">・ 協力金の最終判断は、本号の情報を踏まえ、理事会で別途審議されます</p>
+    </div>
+
+  </div>
+  <div class="folio"><span>02</span><span>菊名桜山公園 / 協力金の行方 | ISSUE 02 · 2026</span></div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     P3 — PROGRESS
+     ══════════════════════════════════ -->
+<div class="page" style="background:var(--lgreen);">
+  <div class="pi">
+
+    <div class="s3">
+      <p class="eyebrow s1">02 — Progress</p>
+      <div class="row ac">
+        <h2 class="t-disp">動いていた一ヶ月</h2>
+        <span class="t-cap cm" style="margin-left:4mm;white-space:nowrap;">2026年3月 ー 4月初旬</span>
+        <div class="sec-rule"></div>
+      </div>
+    </div>
+
+    <div class="qblock s4">
+      <p class="qtext">「菊名桜山の目指す環境目標とそのための活動方針について、関係者で合意形成を図るプロセスに乗せていきたい」</p>
+      <p class="qsrc" style="margin-top:1.5mm;">ー 横浜市・北部公園緑地事務所からの返信より / 2026年4月1日</p>
+    </div>
+
+    <p class="t-str s2">経過タイムライン（全5項目・すべて now=緑マーカー）</p>
+    <div class="tl">
+
+      <div class="tli now">
+        <p class="tldate">2026年3月7日</p>
+        <p class="tltit">副会長（青木）との対話</p>
+        <p class="tlbody">第1号P5でも触れた通り、保全活動の構想と現状について意見交換。<strong>草刈り班・花植え班などの下部組織化の構想、収支の透明化、愛護会としての正しい運営</strong>への考えが共有された。</p>
+      </div>
+
+      <div class="tli now">
+        <p class="tldate">2026年3月9日</p>
+        <p class="tltit">北部公園事務所と協議 ー 会を見送る判断の根拠</p>
+        <p class="tlbody">住民アンケートの結果と理事会の意向を報告。横浜市側からは、愛護会内部から「横浜市のビジョンが明確にならないと動きようがない」との声があり、市は説明資料を準備中、4月以降に整理予定であることが共有された。この段階で大沢会長・饗庭副会長を交えた会を設けても、市のビジョン未提示が理由として返ってくる構図が見えたため、理事会は当該会合を当面見送ると判断した。</p>
+      </div>
+
+      <div class="tli now">
+        <p class="tldate">2026年3月17日</p>
+        <p class="tltit">北部公園事務所と再協議 ー 暫定対応の検討</p>
+        <p class="tlbody">「樹木の育成は待った無し」という認識が市・理事会の共通認識となり、正式な要項策定を待たずに動ける枠組みについて検討開始。保険適用の可能性、必要な書類、関係者の了承の取り方などが論点に。</p>
+      </div>
+
+      <div class="tli now">
+        <p class="tldate">2026年3月30日</p>
+        <p class="tltit">理事会から保険制度の代替案を提示</p>
+        <p class="tlbody">愛護会の正規枠組みに乗せられない期間でも、保全活動が安全に行えるよう、「<strong>横浜市民活動保険</strong>」など別枠の保険制度の適用可能性について理事会から市へ提案。</p>
+      </div>
+
+      <div class="tli now">
+        <p class="tldate">2026年4月1日</p>
+        <p class="tltit">横浜市から方針が提示される</p>
+        <p class="tlbody">北部公園事務所より、3つの方向性が示された。
+          <br>・ <strong>(1) 形式の上で「市主導の草刈りボランティア体験会」とすれば、制度上「愛護会一択」となるボランティア活動の制約を回避し、保全作業を行える可能性がある</strong>
+          <br>・ (2) 菊名桜山公園の環境目標と活動方針について、関係者で合意形成を図るプロセスに乗せていきたい
+          <br>・ (3) 上記プロセスを説明する機会（説明会）を持ちたい
+          <br>・ ただし、説明会の具体的な開催時期は本号執筆時点では未定。</p>
+      </div>
+
+    </div>
+
+    <p class="t-fine cm" style="margin-top:4mm;">上記は2026年4月初旬時点までの経過です。説明会の日程・横浜市の正式な方針資料は、確定次第、住民の皆様にお知らせいたします。</p>
+
+  </div>
+  <div class="folio" style="border-top-color:var(--green);"><span>03</span><span>菊名桜山公園 / 協力金の行方 | ISSUE 02 · 2026</span></div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     P4 — FINDINGS
+     ══════════════════════════════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="s3">
+      <p class="eyebrow s1">03 — Findings</p>
+      <div class="row ac">
+        <h2 class="t-disp">3-4月で見えてきたこと</h2>
+        <div class="sec-rule"></div>
+      </div>
+    </div>
+
+    <p class="t-body s2">3月から4月にかけての対話を通じて、<strong>4つの論点</strong>が見えてきました。これらは、第1号でお示しした「5つの論点」を補完するものとして、本号でご共有します。</p>
+
+    <div class="col" style="gap:1.5mm;">
+
+      <div class="ipt">
+        <div class="ihd"><span class="inum">A</span><span class="ittl">愛護会としての意思決定プロセスに時間を要する局面</span></div>
+        <div class="ibdy" style="padding:1.5mm 4mm;">
+          <p class="t-body">第1号で「関係者間の調整が難航している」とお伝えした状況は、3-4月を通じても継続しています。愛護会内部で、<strong>保全活動の方針について合意形成のプロセスを要する局面</strong>が続いており、これは横浜市も同じ認識です。横浜市からは「関係者で合意形成を図るプロセスに乗せていきたい」（4月1日）との方針が示されました。本案件は、管理組合だけで進められる性質のものではなく、<strong>愛護会・横浜市・管理組合の三者が、それぞれの立場で意思決定を整えていく必要があります。</strong></p>
+          <div class="itags"><span class="tag tlg">合意形成のプロセス</span><span class="tag">三者関与</span><span class="tag tlg">横浜市の認識と一致</span></div>
+        </div>
+      </div>
+
+      <div class="ipt">
+        <div class="ihd"><span class="inum">B</span><span class="ittl">示された道筋と、その射程</span></div>
+        <div class="ibdy" style="padding:1.5mm 4mm;">
+          <p class="t-body">横浜市からは「市主導の草刈りボランティア体験会」という方策が示されました。公園のボランティア活動が制度上「愛護会一択」となる中で、<strong>別の枠組みの可能性</strong>が示されたことには意義があります。一方で、草木の手入れは日常的・継続的な作業であり、単発のイベント形式だけでは補えない部分があります。<strong>毎日の保全を、誰が、どのような枠組みで担うのか</strong> ー この根本の問いについては、現時点では具体的な提案は示されていません。説明会でどのように語られるかが、ひとつの焦点となります。</p>
+          <div class="itags"><span class="tag">市主導イベント形式</span><span class="tag tlg">日常保全という別の課題</span><span class="tag">説明会への注目点</span></div>
+        </div>
+      </div>
+
+      <div class="ipt">
+        <div class="ihd"><span class="inum">C</span><span class="ittl">「動ける状態」が続いていることの意味</span></div>
+        <div class="ibdy" style="padding:1.5mm 4mm;">
+          <p class="t-body">現在、保全活動の最前線は副会長（青木）が個人的に担い続けています。<strong>正規の愛護会メンバーによる活動であり、制度上の問題はありません。</strong>一方で、この個人活動が継続している限り、関係者全体の緊急性は構造的に低下するという側面もあります。第1号でお伝えした通り、副会長（青木）は<strong>実質的な保全活動を個人のご厚意と負担で支えてこられました。</strong>この状態が当然視されることなく、体制の正常化へとつながる議論が、説明会以降に進むことを期待しています。</p>
+          <div class="itags"><span class="tag">個人負担の構造化</span><span class="tag tlg">体制の正常化</span><span class="tag">当然視しない姿勢</span></div>
+        </div>
+      </div>
+
+      <div class="ipt">
+        <div class="ihd"><span class="inum">D</span><span class="ittl">横浜市が示した「環境目標と活動方針の合意形成」</span></div>
+        <div class="ibdy" style="padding:1.5mm 4mm;">
+          <p class="t-body">4月1日の横浜市からの返信には、菊名桜山公園が目指す姿そのものを関係者で合意するプロセスへの言及がありました。「現地の土や水の条件に相応しく、桜を生かしつつ植物など多様で、地域の方のニーズにも合って、という合理性が大事だと考えております」（横浜市・4月1日）これは協力金や草刈りという個別論を超えた、<strong>公園としてのあり方を関係者で合意していくプロセスです。</strong>本号執筆時点では、この合意形成プロセスがどのように進められるかが次の焦点となります。</p>
+          <div class="itags"><span class="tag tlg">公園のビジョン</span><span class="tag">関係者合意</span><span class="tag cm">第3号で詳述予定</span></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="folio"><span>04</span><span>菊名桜山公園 / 協力金の行方 | ISSUE 02 · 2026</span></div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     P5 — STANCE
+     ══════════════════════════════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="s3">
+      <p class="eyebrow s1">04 — Stance</p>
+      <div class="row ac">
+        <h2 class="t-disp">理事会の現在地</h2>
+        <div class="sec-rule"></div>
+      </div>
+    </div>
+
+    <p class="t-body s4">ここまでお伝えした経過と論点を踏まえ、本案件に対する理事会の現在の姿勢を整理してお伝えします。<strong>結論を出す段階ではなく、むしろ全関係者が整理のフェーズにある ー それが現状です。</strong></p>
+
+    <div class="col g3 s3">
+
+      <div class="cardG" style="padding:4mm 5mm;">
+        <p class="t-cap cm s2">会のタイミングについて</p>
+        <p class="t-body">大沢会長・饗庭副会長を交えた説明の場は、横浜市のビジョン整理を待った上で設けることが、有意義な対話につながると判断しています。市のビジョンが整わない段階での会合は、それぞれの立場の確認に終始し、合意形成には至らない見込みです。横浜市の説明会開催を見据えながら、<strong>適切なタイミングで会の場を設けることを目指します。</strong></p>
+      </div>
+
+      <div class="card" style="padding:4mm 5mm;">
+        <p class="t-cap cm s2">個人負担を当然視しない</p>
+        <p class="t-body">副会長（青木）が個人として保全活動を担い続けている状態は、<strong>関係者全体にとって持続可能ではありません。</strong>理事会としては、この状態を当然視しないスタンスを取り、合意形成のプロセスを通じた<strong>体制の正常化</strong>を関係者に求めていきます。</p>
+      </div>
+
+      <div class="card" style="padding:4mm 5mm;">
+        <p class="t-cap cm s2">いま、すべてが「これから」の段階にある</p>
+        <p class="t-body">第1号アンケートでは、住民の方々の幅広いご意見が可視化されました。協力金については「使途の透明性が確保されれば継続したい」という役割分担を前提としたお声がある一方、「ボランティア募集や住民参加の仕組みづくりを通じて、より関与を深めていく」方向を望むお声、そして「現状では継続に賛同しがたい」というお声もありました。いずれも住民の真摯なご意見として、理事会は尊重しています。<strong>ご意見は随時お寄せいただけます</strong>。未回答の世帯の方も、既にご意見をくださった方も、お気軽にお声をお聞かせください。現時点で、これらのご意見をどのような形に落とし込んでいくか ー その<strong>方向性自体が、これから関係者の合意形成プロセスの中で議論されていくものです。</strong>理事会としては、いずれの方向にも進路を確定させず、合意形成のプロセスを待つ姿勢を取ります。合意形成が進むなかで、住民の関わり方について新しい選択肢が見えてくる可能性もあります。<strong>より積極的に関与したいというお声</strong>が活かせる形を関係者と検討していくことも、<strong>お金という形で関わる役割分担を整えていくこと</strong>も、<strong>そもそもの協力金のあり方を見直していくこと</strong>も、いずれもこれからの議論の対象です。</p>
+      </div>
+
+    </div>
+
+    <div class="card s3" style="border-left:3px solid var(--rose);padding:4mm 5mm;">
+      <p class="t-cap cm s2">留意事項</p>
+      <div class="gr3 g2">
+        <p class="t-body">・ 本号は2026年5月時点での経過報告です（状況は流動的）</p>
+        <p class="t-body">・ 横浜市の説明会日程は本号執筆時点では未定</p>
+        <p class="t-body">・ 協力金の最終判断は、本号で得た情報を踏まえ、理事会で別途審議されます</p>
+      </div>
+    </div>
+
+  </div>
+  <div class="folio"><span>05</span><span>菊名桜山公園 / 協力金の行方 | ISSUE 02 · 2026</span></div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     P6 — WHAT'S NEXT
+     ══════════════════════════════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="s3">
+      <p class="eyebrow s1">05 — What's Next</p>
+      <div class="row ac">
+        <h2 class="t-disp">次のステップ</h2>
+        <div class="sec-rule"></div>
+      </div>
+    </div>
+
+    <div class="gr2 s4" style="align-items:start;gap:5mm;">
+
+      <div class="cardG" style="padding:4mm 5mm;">
+        <p class="t-cap cm s2">これからの動き</p>
+        <div class="col g3">
+          <div class="row afs g3">
+            <span style="font-family:'Oswald';font-size:13pt;font-weight:800;color:var(--green);min-width:6mm;line-height:1.3;">01</span>
+            <p class="t-body">横浜市の<strong>説明会開催</strong>を待ち、その内容を住民の皆様に共有します。</p>
+          </div>
+          <div class="row afs g3">
+            <span style="font-family:'Oswald';font-size:13pt;font-weight:800;color:var(--green);min-width:6mm;line-height:1.3;">02</span>
+            <p class="t-body">横浜市から示された<strong>環境目標の合意形成プロセス</strong>に、管理組合として参加していきます。</p>
+          </div>
+          <div class="row afs g3">
+            <span style="font-family:'Oswald';font-size:13pt;font-weight:800;color:var(--green);min-width:6mm;line-height:1.3;">03</span>
+            <p class="t-body">大沢会長・饗庭副会長を交えた説明の場を、適切なタイミングで設けることを引き続き目指します。</p>
+          </div>
+          <div class="row afs g3">
+            <span style="font-family:'Oswald';font-size:13pt;font-weight:800;color:var(--green);min-width:6mm;line-height:1.3;">04</span>
+            <p class="t-body">5月の協力金判断については、本号で得た情報を踏まえ、理事会で審議します。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col g3">
+        <div class="card" style="border-left:3px solid var(--rose);">
+          <p class="t-cap cm s2">本号の位置づけ</p>
+          <div class="gr3 g2">
+            <p class="t-body">・ <strong>本件は議案ではなく、情報提供および意見募集として位置づけております</strong></p>
+            <p class="t-body">・ 次号（ISSUE 03）で、横浜市方針の確定後に改めてご報告予定</p>
+            <p class="t-body">・ 状況は流動的であり、本号は5月時点での経過報告</p>
+          </div>
+        </div>
+
+        <div class="cardD" style="padding:4mm 5mm;">
+          <p class="t-cap s2" style="color:#B5B5B5;">ご意見をお聞かせください</p>
+          <p class="t-body s2" style="color:#FDFDFD;">今後の理事会での継続審議に向けた参考として、引き続き住民の皆様のご意見を広く募集しております。</p>
+          <div style="display:inline-flex;align-items:center;background:var(--green);border:1.5px solid var(--border);border-radius:9999px;padding:2mm 5mm;">
+            <span class="t-cap">理事会へ意見を送る</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="f1"></div>
+
+    <!-- closing message -->
+    <div class="s3" style="text-align:center;">
+      <p class="t-fine cm">動きが見えるとき、それは多くの場合、動きが整理された後です。</p>
+      <p class="t-fine cm">本号は、その整理の途中にあります。</p>
+    </div>
+
+    <!-- footer row -->
+    <div style="border-top:1.5px solid var(--border);padding-top:4mm;">
+      <div class="row jb ac">
+        <div class="row ac g3">
+          <svg width="56" height="56" viewBox="0 0 90 90" style="flex-shrink:0;">
+            <g transform="translate(45,45)">
+              <ellipse cx="0" cy="-32" rx="10" ry="18" fill="#F2A8BA" stroke="#000" stroke-width="1" transform="rotate(0)"/>
+              <ellipse cx="0" cy="-32" rx="10" ry="18" fill="#F2A8BA" stroke="#000" stroke-width="1" transform="rotate(72)"/>
+              <ellipse cx="0" cy="-32" rx="10" ry="18" fill="#F2A8BA" stroke="#000" stroke-width="1" transform="rotate(144)"/>
+              <ellipse cx="0" cy="-32" rx="10" ry="18" fill="#F2A8BA" stroke="#000" stroke-width="1" transform="rotate(216)"/>
+              <ellipse cx="0" cy="-32" rx="10" ry="18" fill="#F2A8BA" stroke="#000" stroke-width="1" transform="rotate(288)"/>
+              <circle cx="0" cy="0" r="18" fill="#FDFDFD" stroke="#000" stroke-width="1"/>
+              <circle cx="-5" cy="-3" r="2" fill="#000"/>
+              <circle cx="5"  cy="-3" r="2" fill="#000"/>
+              <path d="M -6 4 Q 0 9 6 4" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            </g>
+          </svg>
+          <div>
+            <p class="t-fine cm">マートルコート菊名 管理組合</p>
+            <p class="t-fine cm">菊名桜山公園 / 協力金の行方 ISSUE 02 ／ 2026年5月</p>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-end;gap:4mm;">
+          <div style="text-align:center;">
+            <img src="data:image/png;base64,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" style="width:18mm;height:18mm;image-rendering:pixelated;">
+            <p class="t-fine cm" style="margin-top:1mm;font-size:6.5pt;">ISSUE 02 Web版</p>
+          </div>
+          <div style="text-align:center;">
+            <img src="data:image/png;base64,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" style="width:18mm;height:18mm;image-rendering:pixelated;">
+            <p class="t-fine cm" style="margin-top:1mm;font-size:6.5pt;">目次ページ</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="t-fine cm" style="text-align:center;margin-top:4mm;line-height:1.65;">
+      本資料はマートルコート菊名の住民の皆様に向けた情報提供資料です。<br>
+      内容の無断複製・転載・外部への配布はご遠慮ください。<br>
+      記載されている個人名等につきましては、お取り扱いにご配慮をお願いいたします。<br>
+      © 2026 マートルコート菊名 管理組合
+    </p>
+
+  </div>
+  <div class="folio"><span>06</span><span>菊名桜山公園 / 協力金の行方 | ISSUE 02 · 2026</span></div>
+</div>
+
+
+</body>
+</html>

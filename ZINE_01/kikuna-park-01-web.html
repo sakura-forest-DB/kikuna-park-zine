@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>菊名桜山公園 / 協力金の行方 | ISSUE 01</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Oswald:wght@700;800&family=Caveat&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green:   #88C984;
+      --pink:    #F9C5D0;
+      --rose:    #C85A7A;
+      --wine:    #7A2B4A;
+      --lgreen:  #EAF3E8;
+      --ink:     #000000;
+      --canvas:  #FDFDFD;
+      --dark:    #0A0A0A;
+      --muted:   #5C5C5C;
+      --mutedlt: #B5B5B5;
+      --border:  #000000;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #BBBBBB;
+      padding: 8mm 0;
+      font-family: 'Hiragino Maru Gothic ProN', 'Hiragino Maru Gothic Pro', 'Noto Sans JP', sans-serif;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    /* ===== PAGE ===== */
+    .page {
+      width: 210mm;
+      height: 293mm;   /* 297mm - 4mm バッファ（プリンター余白対策） */
+      margin: 0 auto 10mm;
+      background: var(--canvas);
+      position: relative;
+      overflow: hidden;
+    }
+    .pi {
+      position: absolute;
+      inset: 0;
+      padding: 11mm 15mm 18mm;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== FOLIO ===== */
+    .folio {
+      position: absolute;
+      bottom: 6mm;
+      left: 16mm;
+      right: 16mm;
+      border-top: 0.5px solid var(--border);
+      padding-top: 2mm;
+      display: flex;
+      justify-content: space-between;
+    }
+    .folio span {
+      font-family: 'Oswald', sans-serif;
+      font-size: 7pt;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ===== TYPE ===== */
+    .cover-h {
+      font-family: 'Hiragino Maru Gothic ProN', 'Hiragino Maru Gothic Pro', 'Noto Sans JP', sans-serif;
+      font-size: 38pt; font-weight: 900;
+      line-height: 1.1; letter-spacing: 0.04em;
+    }
+    .cover-s {
+      font-family: 'Hiragino Maru Gothic ProN', 'Hiragino Maru Gothic Pro', 'Noto Sans JP', sans-serif;
+      font-size: 14pt; font-weight: 500;
+      line-height: 1.65; letter-spacing: 0.02em;
+    }
+    .t-disp {
+      font-family: 'Hiragino Maru Gothic ProN', 'Hiragino Maru Gothic Pro', 'Noto Sans JP', sans-serif;
+      font-size: 18pt; font-weight: 900;
+      line-height: 1.2; letter-spacing: 0.04em;
+    }
+    .t-lead { font-size: 12pt; font-weight: 500; line-height: 1.7; letter-spacing: 0.02em; }
+    .t-body { font-size: 10.5pt; font-weight: 400; line-height: 1.75; letter-spacing: 0.04em; }
+    .t-str  { font-size: 10.5pt; font-weight: 700; line-height: 1.65; letter-spacing: 0.04em; }
+    .t-cap  {
+      font-family: 'Oswald', sans-serif;
+      font-size: 8pt; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .t-fine { font-size: 8pt; font-weight: 400; line-height: 1.4; letter-spacing: 0.06em; }
+    .t-num  { font-variant-numeric: tabular-nums; }
+    strong  { font-weight: 700; }
+    .cm  { color: var(--muted); }
+    .cml { color: var(--mutedlt); }
+    .cw  { color: var(--wine); }
+
+    /* ===== SPACING ===== */
+    .s1 { margin-bottom: 2mm; }
+    .s2 { margin-bottom: 3mm; }
+    .s3 { margin-bottom: 5mm; }
+    .s4 { margin-bottom: 7mm; }
+    .s5 { margin-bottom: 10mm; }
+
+    /* ===== FLEX / GRID ===== */
+    .row   { display: flex; }
+    .col   { display: flex; flex-direction: column; }
+    .f1    { flex: 1; }
+    .ac    { align-items: center; }
+    .afs   { align-items: flex-start; }
+    .jb    { justify-content: space-between; }
+    .g1    { gap: 1.5mm; }
+    .g2    { gap: 2mm; }
+    .g3    { gap: 3mm; }
+    .g4    { gap: 4mm; }
+    .g5    { gap: 5mm; }
+    .gr2   { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+    .gr3   { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm; }
+    .gr5   { display: grid; grid-template-columns: repeat(5,1fr); gap: 2mm; }
+
+    /* ===== CARD ===== */
+    .card  { background: var(--canvas); border: 1.5px solid var(--border); border-radius: 4mm; padding: 3.5mm 4.5mm; }
+    .cardG { background: var(--lgreen); border: 1.5px solid var(--border); border-radius: 4mm; padding: 3.5mm 4.5mm; }
+    .cardP { background: var(--pink);   border: 1.5px solid var(--border); border-radius: 4mm; padding: 3.5mm 4.5mm; }
+    .cardD { background: var(--dark);   border: 1.5px solid var(--border); border-radius: 4mm; padding: 3.5mm 4.5mm; }
+
+    /* ===== TAG ===== */
+    .tag {
+      display: inline-flex; align-items: center;
+      background: var(--pink); color: var(--ink);
+      padding: 0.5mm 2.5mm;
+      border: 1px solid var(--border); border-radius: 9999px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 6pt; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
+    }
+    .tg  { background: var(--green); }
+    .tr  { background: var(--rose); }
+    .tlg { background: var(--lgreen); }
+    .td  { background: var(--dark); color: var(--canvas); }
+
+    /* ===== STANCE BAR ===== */
+    .sbar {
+      display: flex;
+      border: 1.5px solid var(--border); border-radius: 9999px;
+      overflow: hidden; height: 8mm;
+    }
+    .sseg {
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-size: 6pt; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      white-space: nowrap; padding: 0 2mm;
+    }
+
+    /* ===== QUOTE ===== */
+    .qblock { border-left: 3px solid var(--wine); padding-left: 4mm; }
+    .qtext  {
+      font-family: 'Caveat', serif;
+      font-size: 13pt; font-style: italic;
+      color: var(--wine); line-height: 1.5;
+    }
+    .qsrc { font-family: 'Oswald', sans-serif; font-size: 7.5pt; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+    /* ===== TIMELINE ===== */
+    .tl    { padding-left: 6mm; position: relative; }
+    .tl::before { content:''; position:absolute; left:2mm; top:2mm; bottom:2mm; width:1px; background:var(--border); }
+    .tli   { position: relative; margin-bottom: 3mm; }
+    .tli:last-child { margin-bottom: 0; }
+    .tli::before {
+      content:''; position:absolute; left:-5mm; top:1.5mm;
+      width:3mm; height:3mm;
+      border:1px solid var(--border); border-radius:9999px;
+      background: var(--canvas);
+    }
+    .tli.now::before    { background: var(--green); }
+    .tli.future::before { background: var(--pink); border-style: dashed; }
+    .tldate { font-family:'Oswald',sans-serif; font-size:7.5pt; font-weight:600; letter-spacing:0.10em; text-transform:uppercase; color:var(--muted); }
+    .tltit  { font-size:10.5pt; font-weight:700; letter-spacing:0.04em; line-height:1.4; }
+    .tlbody { font-size:10pt; line-height:1.65; letter-spacing:0.03em; }
+
+    /* ===== ISSUE POINT ===== */
+    .ipt { border:1.5px solid var(--border); border-radius:3.5mm; overflow:hidden; }
+    .ihd { background:var(--green); padding:1.5mm 4mm; display:flex; align-items:center; gap:3mm; border-bottom:1.5px solid var(--border); }
+    .inum { font-family:'Oswald',sans-serif; font-size:11pt; font-weight:800; line-height:1; font-variant-numeric:tabular-nums; }
+    .ittl { font-size:11pt; font-weight:700; letter-spacing:0.04em; }
+    .ibdy { background:var(--canvas); padding:2mm 4mm; }
+    .itags { display:flex; flex-wrap:wrap; gap:1.5mm; margin-top:2mm; }
+
+    /* ===== STRIPE ===== */
+    .stripe {
+      background: var(--green);
+      border-top:1.5px solid var(--border); border-bottom:1.5px solid var(--border);
+      padding: 2mm 4mm; overflow: hidden;
+    }
+    .stripe span {
+      font-family:'Oswald',sans-serif; font-size:9pt; font-weight:700;
+      text-transform:uppercase; letter-spacing:0.02em; white-space:nowrap;
+    }
+
+    /* ===== STAKEHOLDER ===== */
+    .stkh { border:1.5px solid var(--border); border-radius:4mm; overflow:hidden; }
+    .stkh-h { padding:2mm 4mm; border-bottom:1.5px solid var(--border); }
+    .stkh-b { padding:3mm 4mm; }
+
+    /* ===== EYEBROW + SECTION TITLE ===== */
+    .eyebrow { font-family:'Oswald',sans-serif; font-size:7pt; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); }
+    .sec-rule { flex:1; height:2px; background:var(--green); margin-left:3mm; }
+
+    /* ===== DIVIDER ===== */
+    .hr { border:none; border-top:1px solid var(--border); }
+
+    /* ===== PRINT ===== */
+    @media print {
+      @page { size: A4 portrait; margin: 0; }
+      body { background: white; padding: 0; }
+      /*
+        page-break-after: always を外す。
+        297mmの要素が自然に1ページを埋めるので、
+        明示的な改ページは「二重改ページ→白紙」の原因になる。
+        page-break-inside: avoid だけで「ページをまたがない」を保証する。
+      */
+      .page {
+        margin: 0;
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+<!-- ══════════════════════════════════
+     P1 — COVER
+     ══════════════════════════════════ -->
+<div class="page" style="background:var(--pink);">
+
+  <!-- decorative flower (right) -->
+  <div style="position:absolute;right:-12mm;top:8mm;opacity:0.45;pointer-events:none;">
+    <svg width="380" height="460" viewBox="0 0 380 460" fill="none">
+      <g transform="translate(220,220)">
+        <ellipse cx="0" cy="-120" rx="42" ry="86" fill="#88C984" stroke="#000" stroke-width="1.5" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-120" rx="42" ry="86" fill="#88C984" stroke="#000" stroke-width="1.5" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-120" rx="42" ry="86" fill="#88C984" stroke="#000" stroke-width="1.5" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-120" rx="42" ry="86" fill="#88C984" stroke="#000" stroke-width="1.5" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-120" rx="42" ry="86" fill="#88C984" stroke="#000" stroke-width="1.5" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="65" fill="#FDFDFD" stroke="#000" stroke-width="1.5"/>
+        <circle cx="-18" cy="-8" r="8" fill="#000"/>
+        <circle cx="18"  cy="-8" r="8" fill="#000"/>
+        <path d="M -23 14 Q 0 32 23 14" stroke="#000" stroke-width="4" fill="none" stroke-linecap="round"/>
+      </g>
+      <g transform="translate(80,390)">
+        <ellipse cx="0" cy="-46" rx="15" ry="32" fill="#FDFDFD" stroke="#000" stroke-width="1" transform="rotate(0)"/>
+        <ellipse cx="0" cy="-46" rx="15" ry="32" fill="#FDFDFD" stroke="#000" stroke-width="1" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-46" rx="15" ry="32" fill="#FDFDFD" stroke="#000" stroke-width="1" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-46" rx="15" ry="32" fill="#FDFDFD" stroke="#000" stroke-width="1" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-46" rx="15" ry="32" fill="#FDFDFD" stroke="#000" stroke-width="1" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="26" fill="#88C984" stroke="#000" stroke-width="1"/>
+        <circle cx="-7" cy="-4" r="3" fill="#000"/>
+        <circle cx="7"  cy="-4" r="3" fill="#000"/>
+        <path d="M -8 5 Q 0 12 8 5" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- content -->
+  <div class="pi" style="justify-content:space-between;padding-bottom:18mm;">
+
+    <!-- top badge -->
+    <div>
+      <span class="tag tg" style="font-size:7.5pt;padding:1mm 3.5mm;">ISSUE 01 · 2026</span>
+    </div>
+
+    <!-- title block -->
+    <div>
+      <div style="width:18mm;height:3px;background:var(--ink);margin-bottom:5mm;"></div>
+      <h1 class="cover-h">菊名桜山公園<br>協力金の行方</h1>
+      <div style="height:5mm;"></div>
+      <p class="cover-s">協力金、続けますか？<br>10世帯の声と、これからの判断材料。</p>
+      <div style="height:8mm;"></div>
+      <p class="t-fine cm" style="font-size:8pt;letter-spacing:0.08em;line-height:1;">01 Background · 02 Survey · 03 Issues · 04 Progress · 05 Next</p>
+      <div class="row g4 ac" style="flex-wrap:wrap;margin-top:4mm;">
+        <span class="t-cap cm">マートルコート菊名 管理組合</span>
+        <span class="t-cap cm">·</span>
+        <span class="t-cap cm">2026年5月</span>
+        <span class="t-cap cm">·</span>
+        <span class="t-cap cm">住民向け情報提供</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- bottom stripe -->
+  <div class="stripe" style="position:absolute;bottom:0;left:0;right:0;">
+    <span>公園のみどりを守るのは誰か ✿ 協力金の行方 ✳︎ 愛護会の現在地 ☻ 住民の声 ✿ 菊名桜山公園 ✳︎ マートルコート菊名 ☻</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     P2 — BACKGROUND
+     ══════════════════════════════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="s3">
+      <p class="eyebrow s1">01 — Background</p>
+      <div class="row ac">
+        <h2 class="t-disp">この件のあらまし</h2>
+        <div class="sec-rule"></div>
+      </div>
+    </div>
+
+    <!-- lead + stats -->
+    <div class="gr2 s4" style="align-items:start;gap:5mm;">
+      <div>
+        <p class="t-lead s2">マートルコート菊名管理組合では、隣接する「菊名桜山公園」の愛護会に、毎年<strong>3万円</strong>の協力金を支出してきました。</p>
+        <p class="t-body s2">前身の「桜の森を守る会」の時代から続く取り組みで、地域の自然保全という共通の目的のもとに積み重ねられてきたものです。</p>
+        <p class="t-body">しかし近年、愛護会の活動状況が不明瞭となり、本来の目的である「山の保全」よりもイベント中心の運営になっているとの疑問の声が出てきました。本年度（2024年度分）の協力金は2025年5月28日付で支払済み。問題は<strong>来年度（2025年度分）以降をどうするか</strong>です。</p>
+      </div>
+
+      <div class="col g3">
+        <div class="cardP">
+          <p class="t-cap cm s1">年間協力金の支出額</p>
+          <div class="row ac">
+            <span style="font-family:'Oswald';font-size:28pt;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;">3</span>
+            <span style="font-size:11pt;font-weight:700;margin-left:1mm;">万円</span>
+          </div>
+          <p class="t-fine cm" style="margin-top:1mm;">「桜の森を守る会」時代から継続</p>
+        </div>
+        <div class="gr2" style="gap:2.5mm;">
+          <div class="card">
+            <p class="t-cap cm s1">愛護会</p>
+            <span style="font-family:'Oswald';font-size:20pt;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;">3</span><span style="font-size:9pt;font-weight:700;">名</span>
+            <p class="t-fine cm" style="margin-top:1mm;">会長・副会長2名</p>
+          </div>
+          <div class="card">
+            <p class="t-cap cm s1">アンケート</p>
+            <span style="font-family:'Oswald';font-size:20pt;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;">10</span><span style="font-size:9pt;font-weight:700;">世帯</span>
+            <p class="t-fine cm" style="margin-top:1mm;">2026年2月実施</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="hr s3">
+
+    <p class="t-str s2">関係者</p>
+    <div class="gr3">
+      <div class="stkh">
+        <div class="stkh-h" style="background:var(--dark);">
+          <p class="t-cap" style="color:#FDFDFD;">管理組合側</p>
+        </div>
+        <div class="stkh-b">
+          <p class="t-str s1">マートルコート菊名<br>管理組合・理事会</p>
+          <p class="t-body">協力金の支出元。住民の意見を集め今後の方針を検討中。本資料の発行者。</p>
+        </div>
+      </div>
+      <div class="stkh">
+        <div class="stkh-h" style="background:var(--green);">
+          <p class="t-cap">菊名桜山公園 愛護会</p>
+        </div>
+        <div class="stkh-b">
+          <p class="t-str s1">大沢会長・饗庭副会長<br>青木副会長（3名体制）</p>
+          <p class="t-body">前会長・清水氏退任後に新体制。青木さんが保全活動を個人で支えてきた。</p>
+        </div>
+      </div>
+      <div class="stkh">
+        <div class="stkh-h" style="background:var(--lgreen);">
+          <p class="t-cap">行政側</p>
+        </div>
+        <div class="stkh-b">
+          <p class="t-str s1">横浜市みどり環境局<br>北部公園緑地事務所</p>
+          <p class="t-body">裏戸さん担当。市のビジョン策定を進行中。4月以降に資料まとめ予定。</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="folio"><span>02</span><span>菊名桜山公園 / 協力金の行方 | ISSUE 01 · 2026</span></div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     P3 — SURVEY（アンケート・1枚に統合）
+     ══════════════════════════════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="s3">
+      <p class="eyebrow s1">02 — Survey Results</p>
+      <div class="row ac">
+        <h2 class="t-disp">アンケート結果</h2>
+        <span class="t-cap cm" style="margin-left:4mm;white-space:nowrap;">2026年2月 ／ 10世帯</span>
+        <div class="sec-rule"></div>
+      </div>
+    </div>
+
+    <p class="t-str s2">協力金支出の継続に関するスタンス分布</p>
+    <div class="sbar s1">
+      <div class="sseg" style="background:var(--green);width:10%;border-right:1px solid var(--border);">賛成 1</div>
+      <div class="sseg" style="background:var(--pink);width:50%;border-right:1px solid var(--border);">条件付き賛成 5</div>
+      <div class="sseg" style="background:var(--lgreen);width:20%;border-right:1px solid var(--border);">懸念 2</div>
+      <div class="sseg" style="background:#D0D0D0;width:20%;">反対 2</div>
+    </div>
+    <div class="row g3 s3">
+      <span class="t-fine cm">■ 賛成 1</span>
+      <span class="t-fine cm">■ 条件付き賛成 5</span>
+      <span class="t-fine cm">■ 懸念あり 2</span>
+      <span class="t-fine cm">■ 反対 2</span>
+    </div>
+
+    <hr class="hr s3">
+
+    <p class="t-str s2">住民の主な関心テーマ（複数回答）</p>
+    <div class="col g2 s3">
+      <div class="row ac g4" style="padding:2mm 3.5mm;border:1.5px solid var(--border);border-radius:4mm;">
+        <span style="font-family:'Oswald';font-size:18pt;font-weight:800;line-height:1;color:var(--green);min-width:8mm;font-variant-numeric:tabular-nums;">5</span>
+        <div><p class="t-str s1">使途の透明性・収支報告</p><p class="t-body cm">前会長時代には把握できた収支情報が不透明に。内訳開示を求める声が最多。</p></div>
+      </div>
+      <div class="row ac g4" style="padding:2mm 3.5mm;border:1.5px solid var(--border);border-radius:4mm;">
+        <span style="font-family:'Oswald';font-size:18pt;font-weight:800;line-height:1;color:var(--green);min-width:8mm;font-variant-numeric:tabular-nums;">5</span>
+        <div><p class="t-str s1">青木さんへの感謝と個人依存への懸念</p><p class="t-body cm">保全活動を一人で支えてきたことへの感謝と、持続可能性への危機感。</p></div>
+      </div>
+      <div class="row ac g4" style="padding:2mm 3.5mm;border:1.5px solid var(--border);border-radius:4mm;">
+        <span style="font-family:'Oswald';font-size:18pt;font-weight:800;line-height:1;color:var(--green);min-width:8mm;font-variant-numeric:tabular-nums;">4</span>
+        <div><p class="t-str s1">イベントへの疑問・反対</p><p class="t-body cm">保全よりもイベント中心との認識。全廃要望から選別容認まで温度差あり。</p></div>
+      </div>
+      <div class="row ac g4" style="padding:2mm 3.5mm;border:1.5px solid var(--border);border-radius:4mm;">
+        <span style="font-family:'Oswald';font-size:18pt;font-weight:800;line-height:1;color:var(--green);min-width:8mm;font-variant-numeric:tabular-nums;">3</span>
+        <div><p class="t-str s1">マンション資産価値との関連・住民参加の提案</p><p class="t-body cm">公園の豊かさが資産価値を高めるとの認識。ボランティア募集等の具体案も。</p></div>
+      </div>
+      <div class="row ac g4" style="padding:2mm 3.5mm;border:1.5px solid var(--border);border-radius:4mm;">
+        <span style="font-family:'Oswald';font-size:18pt;font-weight:800;line-height:1;color:var(--green);min-width:8mm;font-variant-numeric:tabular-nums;">2</span>
+        <div><p class="t-str s1">市の関与強化・住民参加の促進</p><p class="t-body cm">行政の役割明確化と、住民が主体的に関われる仕組みを求める声。</p></div>
+      </div>
+    </div>
+
+    <hr class="hr s3">
+
+    <p class="t-str s2">住民の声から生まれたキーワード</p>
+    <div class="s3" style="display:flex;flex-wrap:wrap;gap:1.5mm;">
+      <span class="tag">収支の透明性</span>
+      <span class="tag">公園保全優先</span>
+      <span class="tag tg">協力金賛成</span>
+      <span class="tag">使途の明確化</span>
+      <span class="tag tlg">感謝・評価</span>
+      <span class="tag tr">イベント反対</span>
+      <span class="tag">ボランティア募集</span>
+      <span class="tag">公園マナー</span>
+      <span class="tag">市の関与強化</span>
+      <span class="tag">組織体制</span>
+      <span class="tag tlg">住民参加の促進</span>
+      <span class="tag">整備活動の再開</span>
+      <span class="tag">マンション資産価値</span>
+      <span class="tag tr">愛護会への不信</span>
+      <span class="tag tlg">任意の協力金</span>
+      <span class="tag">活動・決算チェック</span>
+      <span class="tag">草刈り隊・花植え隊</span>
+      <span class="tag">案内・表示の改善</span>
+    </div>
+
+    <hr class="hr s3">
+
+    <div class="cardG">
+      <p class="t-cap cm s2">留意事項</p>
+      <div class="gr3 g2">
+        <p class="t-body">・ 回答10世帯のみ。残りの世帯の意見は未把握</p>
+        <p class="t-body">・ 「反対」2世帯は条件次第でスタンスが変わる可能性あり</p>
+        <p class="t-body">・ 清水前会長時代との比較が複数世帯から出ている</p>
+      </div>
+    </div>
+
+  </div>
+  <div class="folio"><span>03</span><span>菊名桜山公園 / 協力金の行方 | ISSUE 01 · 2026</span></div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     P5 — KEY ISSUES
+     ══════════════════════════════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="s3">
+      <p class="eyebrow s1">03 — Key Issues</p>
+      <div class="row ac">
+        <h2 class="t-disp">理事会で検討すべき 5つの論点</h2>
+        <div class="sec-rule"></div>
+      </div>
+    </div>
+
+    <div class="col g2">
+
+      <div class="ipt">
+        <div class="ihd"><span class="inum">01</span><span class="ittl">協力金の継続可否と条件</span></div>
+        <div class="ibdy">
+          <p class="t-body">賛成・条件付き賛成が6世帯と多数だが、反対2・懸念2と意見は分かれる。継続する場合は<strong>収支報告書の提出・内訳の明確化</strong>が最低条件。任意協力金への切替案も検討に値する。</p>
+          <div class="itags"><span class="tag">収支報告の提出</span><span class="tag">内訳の明確化</span><span class="tag tlg">任意協力金への切替も検討</span></div>
+        </div>
+      </div>
+
+      <div class="ipt">
+        <div class="ihd"><span class="inum">02</span><span class="ittl">愛護会のイベント活動に対する姿勢</span></div>
+        <div class="ibdy">
+          <p class="t-body">イベント偏重への不満が4世帯。全廃要望から<strong>夜間のジャズナイト等は不要</strong>とする意見まで温度差あり。大音量への苦情は生活環境問題として別途対応も。</p>
+          <div class="itags"><span class="tag tr">イベント全廃要望あり</span><span class="tag">昼間・子ども向けは許容</span><span class="tag tlg">大音量は別問題として対処</span></div>
+        </div>
+      </div>
+
+      <div class="ipt">
+        <div class="ihd"><span class="inum">03</span><span class="ittl">青木さんへの支援と組織体制の再構築</span></div>
+        <div class="ibdy">
+          <p class="t-body">「<strong>花木購入費として直接協賛金を</strong>」「<strong>ボランティア募集・回覧板での呼びかけ</strong>」等の具体的提案あり。青木さん自身も草刈り班・花植え班の下部組織化を構想中。</p>
+          <div class="itags"><span class="tag tg">直接支援の検討</span><span class="tag">ボランティア募集</span><span class="tag">草刈り隊・花植え隊</span></div>
+        </div>
+      </div>
+
+      <div class="ipt">
+        <div class="ihd"><span class="inum">04</span><span class="ittl">横浜市の関与強化と三者連携</span></div>
+        <div class="ibdy">
+          <p class="t-body">「市の一層の関与が将来の保全に不可欠」との指摘。<strong>行政・管理組合・愛護会の三者協議の場</strong>を設けることが鍵。</p>
+          <div class="itags"><span class="tag">市のビジョン明確化を要請</span><span class="tag tlg">三者協議の場の設置</span></div>
+        </div>
+      </div>
+
+      <div class="ipt">
+        <div class="ihd"><span class="inum">05</span><span class="ittl">公園利用マナーの周知強化</span></div>
+        <div class="ibdy">
+          <p class="t-body">球技禁止の案内表示改善、犬のフン放置対策等の具体的要望。愛護会または行政への要望として取りまとめるか。</p>
+          <div class="itags"><span class="tag">案内・表示の改善</span><span class="tag">マナー啓発</span></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="folio"><span>04</span><span>菊名桜山公園 / 協力金の行方 | ISSUE 01 · 2026</span></div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     P6 — PROGRESS
+     ══════════════════════════════════ -->
+<div class="page" style="background:var(--lgreen);">
+  <div class="pi">
+
+    <div class="s3">
+      <p class="eyebrow s1">04 — Progress</p>
+      <div class="row ac">
+        <h2 class="t-disp">今、何が起きているか</h2>
+        <div class="sec-rule"></div>
+      </div>
+    </div>
+
+    <div class="qblock s4">
+      <p class="qtext">「一つの公園に一つの愛護会。その下部組織としてグループを作り、会員としての存在を作ればいい」</p>
+      <p class="qsrc" style="margin-top:1.5mm;">— 青木さん（副会長）との対話より ／ 2026年3月7日</p>
+    </div>
+
+    <p class="t-str s2">経過タイムライン</p>
+    <div class="tl">
+
+      <div class="tli">
+        <p class="tldate">2024年度（2025年5月28日支払）</p>
+        <p class="tltit">協力金 3万円 支出（継続）</p>
+        <p class="tlbody">「雑費」扱いにて支払済み。本年度分は完了。</p>
+      </div>
+
+      <div class="tli">
+        <p class="tldate">2026年2月11日</p>
+        <p class="tltit">工事説明会・意見交換会を開催</p>
+        <p class="tlbody">理事会から横浜市へ正式要請。住民参加のもと愛護会の課題を共有。横浜市も同じ問題意識であることを確認。</p>
+      </div>
+
+      <div class="tli">
+        <p class="tldate">2026年2月</p>
+        <p class="tltit">住民アンケート実施 ／ 10世帯回答</p>
+        <p class="tlbody">条件付き賛成が多数。使途の透明性・青木さんへの感謝と懸念・イベント偏重への不満が主テーマ。</p>
+      </div>
+
+      <div class="tli now">
+        <p class="tldate">2026年3月7日 ← 進行中</p>
+        <p class="tltit">青木さん（副会長）との対話</p>
+        <p class="tlbody">花壇・草刈りの再開提案を受領。助成金（計9万円）が2025〜26年度は届いていない状況が判明。草刈り班・花植え班の組織化構想も共有。</p>
+      </div>
+
+      <div class="tli now">
+        <p class="tldate">2026年3月8〜17日 ← 進行中</p>
+        <p class="tltit">横浜市（裏戸さん）との協議</p>
+        <p class="tlbody">アンケート結果と理事会意向を報告。市も「横浜市のビジョン」整理中で4月以降に資料予定。保険は愛護会公認の活動に参加するボランティアに適用（個人活動は対象外）。</p>
+      </div>
+
+      <div class="tli future">
+        <p class="tldate">2026年4〜5月（予定）</p>
+        <p class="tltit">横浜市ビジョン資料・説明会準備</p>
+        <p class="tlbody">オープンガーデン・カーボン山桜まつりは保全方針未確定のまま開催。<strong>協力金の方針決定は例年5月が期限。</strong></p>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="folio" style="border-top-color:var(--green);"><span>05</span><span>菊名桜山公園 / 協力金の行方 | ISSUE 01 · 2026</span></div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     P7 — NEXT STEPS
+     ══════════════════════════════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="s3">
+      <p class="eyebrow s1">05 — What's Next</p>
+      <div class="row ac">
+        <h2 class="t-disp">次のステップ</h2>
+        <div class="sec-rule"></div>
+      </div>
+    </div>
+
+    <div class="gr2 s4" style="align-items:start;gap:5mm;">
+
+      <div class="cardG" style="padding:4mm 5mm;">
+        <p class="t-cap cm s2">理事会が目指す方向性</p>
+        <div class="col g3">
+          <div class="row afs g3">
+            <span style="font-family:'Oswald';font-size:13pt;font-weight:800;color:var(--green);min-width:6mm;line-height:1.3;">01</span>
+            <p class="t-body">大沢会長・饗庭副会長を交えた<strong>収支説明会・今後のビジョン共有の場</strong>を設ける</p>
+          </div>
+          <div class="row afs g3">
+            <span style="font-family:'Oswald';font-size:13pt;font-weight:800;color:var(--green);min-width:6mm;line-height:1.3;">02</span>
+            <p class="t-body">横浜市（裏戸さん）より、<strong>愛護会とのコンセンサスを取った上で</strong>協力金継続判断の材料を提供してもらう</p>
+          </div>
+          <div class="row afs g3">
+            <span style="font-family:'Oswald';font-size:13pt;font-weight:800;color:var(--green);min-width:6mm;line-height:1.3;">03</span>
+            <p class="t-body">青木さん提案の<strong>草刈り班・花植え班</strong>の組織化を支援できるか検討する</p>
+          </div>
+          <div class="row afs g3">
+            <span style="font-family:'Oswald';font-size:13pt;font-weight:800;color:var(--green);min-width:6mm;line-height:1.3;">04</span>
+            <p class="t-body"><strong>5月の方針決定</strong>に向けて、なるべく早いタイミングで情報を揃える</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col g3">
+        <div class="card" style="border-left:3px solid var(--rose);">
+          <p class="t-cap cm s2">本号の位置づけ</p>
+          <div class="gr3 g2">
+            <p class="t-body">・ <strong>本件は議案ではなく、情報提供および意見募集として位置づけております</strong></p>
+            <p class="t-body">・ 回答10世帯のみのため、引き続き住民の皆様のご意見を募集します</p>
+            <p class="t-body">・ 最終決定は今後の理事会で継続審議されます</p>
+          </div>
+        </div>
+
+        <div class="cardD" style="padding:4mm 5mm;">
+          <p class="t-cap s2" style="color:#B5B5B5;">ご意見をお聞かせください</p>
+          <p class="t-body s2" style="color:#FDFDFD;">今後の理事会での継続審議に向けた参考として、引き続き住民の皆様のご意見を広く募集しております。</p>
+          <div style="display:inline-flex;align-items:center;background:var(--green);border:1.5px solid var(--border);border-radius:9999px;padding:2mm 5mm;">
+            <span class="t-cap">理事会へ意見を送る</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="f1"></div>
+
+    <!-- footer row -->
+    <div style="border-top:1.5px solid var(--border);padding-top:4mm;">
+      <div class="row jb ac">
+        <div class="row ac g3">
+          <svg width="56" height="56" viewBox="0 0 90 90" style="flex-shrink:0;">
+            <g transform="translate(45,45)">
+              <ellipse cx="0" cy="-32" rx="10" ry="18" fill="#F2A8BA" stroke="#000" stroke-width="1" transform="rotate(0)"/>
+              <ellipse cx="0" cy="-32" rx="10" ry="18" fill="#F2A8BA" stroke="#000" stroke-width="1" transform="rotate(72)"/>
+              <ellipse cx="0" cy="-32" rx="10" ry="18" fill="#F2A8BA" stroke="#000" stroke-width="1" transform="rotate(144)"/>
+              <ellipse cx="0" cy="-32" rx="10" ry="18" fill="#F2A8BA" stroke="#000" stroke-width="1" transform="rotate(216)"/>
+              <ellipse cx="0" cy="-32" rx="10" ry="18" fill="#F2A8BA" stroke="#000" stroke-width="1" transform="rotate(288)"/>
+              <circle cx="0" cy="0" r="18" fill="#FDFDFD" stroke="#000" stroke-width="1"/>
+              <circle cx="-5" cy="-3" r="2" fill="#000"/>
+              <circle cx="5"  cy="-3" r="2" fill="#000"/>
+              <path d="M -6 4 Q 0 9 6 4" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            </g>
+          </svg>
+          <div>
+            <p class="t-fine cm">マートルコート菊名 管理組合</p>
+            <p class="t-fine cm">菊名桜山公園 / 協力金の行方 ISSUE 01 ／ 2026年5月</p>
+          </div>
+        </div>
+        <div style="display:flex;align-items:flex-end;gap:4mm;">
+          <div style="text-align:center;">
+            <img src="data:image/png;base64,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" style="width:18mm;height:18mm;image-rendering:pixelated;">
+            <p class="t-fine cm" style="margin-top:1mm;font-size:6.5pt;">ISSUE 01 Web版</p>
+          </div>
+          <div style="text-align:center;">
+            <img src="data:image/png;base64,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" style="width:18mm;height:18mm;image-rendering:pixelated;">
+            <p class="t-fine cm" style="margin-top:1mm;font-size:6.5pt;">目次ページ</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="t-fine cm" style="text-align:center;margin-top:4mm;line-height:1.65;">
+      本資料はマートルコート菊名の住民の皆様に向けた情報提供資料です。<br>
+      内容の無断複製・転載・外部への配布はご遠慮ください。<br>
+      記載されている個人名等につきましては、お取り扱いにご配慮をお願いいたします。<br>
+      © 2026 マートルコート菊名 管理組合
+    </p>
+
+  </div>
+  <div class="folio"><span>06</span><span>菊名桜山公園 / 協力金の行方 | ISSUE 01 · 2026</span></div>
+</div>
+
+
+</body>
+</html>
